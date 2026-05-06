@@ -1,0 +1,20 @@
+framework: MITRE ATLAS
+mapping:
+  AML.T0018:
+    name: Prompt Injection
+    stride: Tampering
+  AML.T0021:
+    name: Exfiltration via ML Inference API
+    stride: Information Disclosure
+  AML.T0034:
+    name: Resource Hijacking
+    stride: Denial of Service
+  AML.T0040:
+    name: Model Supply Chain Compromise
+    stride: Elevation of Privilege
+  AML.T0051:
+    name: Exfiltration via Prompt Injection
+    stride: Information Disclosure
+  AML.T0066:
+    name: AI Agent Tool Abuse
+    stride: Elevation of Privilege

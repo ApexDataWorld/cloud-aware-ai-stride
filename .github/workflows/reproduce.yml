@@ -1,0 +1,24 @@
+name: reproduce-demo
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["**"]
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -e .
+      - name: Run reproducible demo
+        run: python -m cloud_stride demo --output reports/example_report.md
+      - name: Verify report exists
+        run: test -f reports/example_report.md

@@ -1,0 +1,357 @@
+study_id: synthetic-paper2-benchmark
+assessor: baseline_stride
+reference:
+  valid_threat_ids:
+    - T001
+    - T002
+    - T003
+    - T004
+    - T005
+    - T006
+    - T007
+    - T008
+    - T009
+    - T010
+    - T011
+    - T012
+    - T013
+    - T014
+    - T015
+    - T016
+    - T017
+    - T018
+  ai_specific_threat_ids:
+    - T001
+    - T004
+    - T007
+    - T009
+    - T011
+    - T013
+    - T014
+    - T015
+    - T018
+threats:
+  - threat_id: T001
+    scenario_id: s01_customer_support_chatbot
+    title: Prompt injection through retrieved support article
+    category: Tampering
+    ai_threat_type: indirect_prompt_injection
+    component: vector-store
+    asset_at_risk: [internal runbooks]
+    trust_boundary: [app_to_data]
+    ai_specific: true
+    identified: false
+    valid: true
+    canonical_key: s01-prompt-injection
+    likelihood: 4
+    impact: 4
+    priority: High
+    cloud_factors: {privilege_boundary: 1, blast_radius: 2, persistence: 1, detectability: 1, reversibility: 2, compliance_sensitivity: 0}
+    mitigations: [retrieval content sanitization, document authorization, tool-call policy checks]
+    evidence: [retrieval policy test, prompt injection simulation]
+  - threat_id: T002
+    scenario_id: s01_customer_support_chatbot
+    title: Over-broad support runbook access
+    category: Information Disclosure
+    ai_threat_type: sensitive_context_leakage
+    component: orchestration-api
+    asset_at_risk: [internal runbooks]
+    trust_boundary: [public_to_app]
+    ai_specific: false
+    identified: true
+    valid: true
+    canonical_key: s01-runbook-disclosure
+    likelihood: 3
+    impact: 4
+    priority: High
+    cloud_factors: {privilege_boundary: 2, blast_radius: 2, persistence: 1, detectability: 1, reversibility: 2, compliance_sensitivity: 1}
+    mitigations: [least-privilege retrieval access, content filtering]
+    evidence: [access review, retrieval trace sample]
+  - threat_id: T003
+    scenario_id: s02_healthcare_claims_assistant
+    title: Claims traceability gaps in managed inference logs
+    category: Repudiation
+    ai_threat_type: audit_gap
+    component: model-endpoint
+    asset_at_risk: [synthetic claims corpus]
+    trust_boundary: [enterprise_to_ai]
+    ai_specific: false
+    identified: true
+    valid: true
+    canonical_key: s02-audit-gap
+    likelihood: 3
+    impact: 3
+    priority: Moderate
+    cloud_factors: {privilege_boundary: 1, blast_radius: 1, persistence: 1, detectability: 2, reversibility: 2, compliance_sensitivity: 2}
+    mitigations: [signed audit traces, request lineage logging]
+    evidence: [log completeness check, analyst review trace]
+  - threat_id: T004
+    scenario_id: s02_healthcare_claims_assistant
+    title: Memorized claims content returned in unrelated session
+    category: Information Disclosure
+    ai_threat_type: inference_time_data_leakage
+    component: model-endpoint
+    asset_at_risk: [synthetic claims corpus]
+    trust_boundary: [enterprise_to_ai]
+    ai_specific: true
+    identified: false
+    valid: true
+    canonical_key: s02-memorization
+    likelihood: 2
+    impact: 5
+    priority: Critical
+    cloud_factors: {privilege_boundary: 1, blast_radius: 2, persistence: 2, detectability: 1, reversibility: 4, compliance_sensitivity: 4}
+    mitigations: [data minimization, output filtering, provider retention controls]
+    evidence: [leakage test suite, retention policy verification]
+  - threat_id: T005
+    scenario_id: s03_financial_document_summarizer
+    title: Upload bucket misconfiguration exposes draft board material
+    category: Information Disclosure
+    ai_threat_type: storage_misconfiguration
+    component: upload-bucket
+    asset_at_risk: [board materials]
+    trust_boundary: [intake_to_app]
+    ai_specific: false
+    identified: true
+    valid: true
+    canonical_key: s03-bucket-disclosure
+    likelihood: 3
+    impact: 5
+    priority: Critical
+    cloud_factors: {privilege_boundary: 2, blast_radius: 3, persistence: 1, detectability: 1, reversibility: 3, compliance_sensitivity: 2}
+    mitigations: [bucket policy hardening, encryption, object access logging]
+    evidence: [storage policy review, synthetic access test]
+  - threat_id: T006
+    scenario_id: s05_mcp_enterprise_agent
+    title: Weak logging on privileged tool actions
+    category: Repudiation
+    ai_threat_type: tool_call_repudiation
+    component: mcp-gateway
+    asset_at_risk: [change tickets]
+    trust_boundary: [integration_to_privileged]
+    ai_specific: false
+    identified: true
+    valid: true
+    canonical_key: s05-tool-audit
+    likelihood: 3
+    impact: 4
+    priority: High
+    cloud_factors: {privilege_boundary: 2, blast_radius: 2, persistence: 1, detectability: 2, reversibility: 2, compliance_sensitivity: 1}
+    mitigations: [signed tool call logs, approval workflow, session correlation ids]
+    evidence: [audit log trace, approval evidence]
+  - threat_id: T007
+    scenario_id: s05_mcp_enterprise_agent
+    title: Forged MCP server identity triggers unsafe changes
+    category: Spoofing
+    ai_threat_type: tool_spoofing
+    component: mcp-gateway
+    asset_at_risk: [change tickets, internal knowledge base]
+    trust_boundary: [enterprise_to_integration, integration_to_privileged]
+    ai_specific: true
+    identified: false
+    valid: true
+    canonical_key: s05-mcp-spoofing
+    likelihood: 4
+    impact: 5
+    priority: Critical
+    cloud_factors: {privilege_boundary: 4, blast_radius: 4, persistence: 2, detectability: 2, reversibility: 3, compliance_sensitivity: 2}
+    mitigations: [mutual authentication, tool allowlists, consent enforcement]
+    evidence: [server identity test, authorization trace]
+  - threat_id: T008
+    scenario_id: s07_mlops_deployment_pipeline
+    title: Model artifact tampering in registry
+    category: Tampering
+    ai_threat_type: model_artifact_tampering
+    component: model-registry
+    asset_at_risk: [model artifacts]
+    trust_boundary: [build_to_artifact]
+    ai_specific: false
+    identified: true
+    valid: true
+    canonical_key: s07-registry-tampering
+    likelihood: 4
+    impact: 5
+    priority: Critical
+    cloud_factors: {privilege_boundary: 3, blast_radius: 4, persistence: 3, detectability: 2, reversibility: 4, compliance_sensitivity: 2}
+    mitigations: [artifact signing, registry immutability, release approvals]
+    evidence: [signature verification, provenance attestation]
+  - threat_id: T009
+    scenario_id: s07_mlops_deployment_pipeline
+    title: Poisoned evaluation dataset promotes unsafe model
+    category: Tampering
+    ai_threat_type: training_data_poisoning
+    component: training-runner
+    asset_at_risk: [model artifacts]
+    trust_boundary: [engineering_to_build]
+    ai_specific: true
+    identified: false
+    valid: true
+    canonical_key: s07-dataset-poisoning
+    likelihood: 3
+    impact: 5
+    priority: Critical
+    cloud_factors: {privilege_boundary: 2, blast_radius: 3, persistence: 3, detectability: 2, reversibility: 4, compliance_sensitivity: 1}
+    mitigations: [dataset integrity checks, approval gates, evaluation lineage]
+    evidence: [dataset checksum validation, promotion review log]
+  - threat_id: T010
+    scenario_id: s08_multitenant_analytics_assistant
+    title: Cross-tenant query path bypasses row filters
+    category: Elevation of Privilege
+    ai_threat_type: cross_tenant_privilege_escalation
+    component: warehouse
+    asset_at_risk: [tenant usage telemetry]
+    trust_boundary: [ai_to_data]
+    ai_specific: false
+    identified: true
+    valid: true
+    canonical_key: s08-cross-tenant-access
+    likelihood: 3
+    impact: 5
+    priority: Critical
+    cloud_factors: {privilege_boundary: 4, blast_radius: 5, persistence: 2, detectability: 2, reversibility: 3, compliance_sensitivity: 2}
+    mitigations: [tenant-scoped query policies, policy test harness]
+    evidence: [row-level access test, audit query trace]
+  - threat_id: T011
+    scenario_id: s08_multitenant_analytics_assistant
+    title: Generated query leaks neighboring tenant aggregates
+    category: Information Disclosure
+    ai_threat_type: generated_query_leakage
+    component: query-planner
+    asset_at_risk: [tenant usage telemetry]
+    trust_boundary: [app_to_ai, ai_to_data]
+    ai_specific: true
+    identified: false
+    valid: true
+    canonical_key: s08-generated-query-leakage
+    likelihood: 4
+    impact: 4
+    priority: Critical
+    cloud_factors: {privilege_boundary: 3, blast_radius: 5, persistence: 1, detectability: 2, reversibility: 3, compliance_sensitivity: 1}
+    mitigations: [semantic query guardrails, output review, tenant-isolation tests]
+    evidence: [query validation test, output redaction check]
+  - threat_id: T012
+    scenario_id: s08_multitenant_analytics_assistant
+    title: Duplicate cross-tenant leakage finding
+    category: Information Disclosure
+    ai_threat_type: duplicate_reporting
+    component: query-planner
+    asset_at_risk: [tenant usage telemetry]
+    trust_boundary: [ai_to_data]
+    ai_specific: false
+    identified: true
+    valid: true
+    canonical_key: s08-cross-tenant-access
+    likelihood: 3
+    impact: 4
+    priority: High
+    cloud_factors: {privilege_boundary: 3, blast_radius: 4, persistence: 1, detectability: 2, reversibility: 2, compliance_sensitivity: 1}
+    mitigations: [canonical threat review, analyst deduplication guidance]
+    evidence: [threat normalization worksheet]
+  - threat_id: T013
+    scenario_id: s04_code_generation_assistant
+    title: Suggested command sequence exfiltrates repository secrets
+    category: Tampering
+    ai_threat_type: insecure_output_handling
+    component: llm-gateway
+    asset_at_risk: [build tokens, source repositories]
+    trust_boundary: [developer_to_app, app_to_ai]
+    ai_specific: true
+    identified: false
+    valid: true
+    canonical_key: s04-secret-exfiltration-suggestion
+    likelihood: 4
+    impact: 5
+    priority: Critical
+    cloud_factors: {privilege_boundary: 3, blast_radius: 3, persistence: 1, detectability: 2, reversibility: 3, compliance_sensitivity: 2}
+    mitigations: [command filtering, secret scanning, approval gating]
+    evidence: [unsafe command policy test, secret leak review]
+  - threat_id: T014
+    scenario_id: s06_hr_policy_assistant
+    title: Poisoned policy snippet changes benefits guidance
+    category: Tampering
+    ai_threat_type: retrieval_poisoning
+    component: vector-index
+    asset_at_risk: [employee policy records]
+    trust_boundary: [app_to_data]
+    ai_specific: true
+    identified: false
+    valid: true
+    canonical_key: s06-policy-retrieval-poisoning
+    likelihood: 3
+    impact: 4
+    priority: High
+    cloud_factors: {privilege_boundary: 1, blast_radius: 3, persistence: 3, detectability: 2, reversibility: 2, compliance_sensitivity: 2}
+    mitigations: [content provenance checks, index integrity monitoring]
+    evidence: [retrieval integrity test, document provenance log]
+  - threat_id: T015
+    scenario_id: s09_security_operations_copilot
+    title: Confused deputy lets triage agent access privileged response APIs
+    category: Elevation of Privilege
+    ai_threat_type: confused_deputy
+    component: log-tool-router
+    asset_at_risk: [alert telemetry, response playbooks]
+    trust_boundary: [ai_to_integration]
+    ai_specific: true
+    identified: false
+    valid: true
+    canonical_key: s09-confused-deputy
+    likelihood: 4
+    impact: 5
+    priority: Critical
+    cloud_factors: {privilege_boundary: 4, blast_radius: 4, persistence: 2, detectability: 2, reversibility: 3, compliance_sensitivity: 2}
+    mitigations: [tool-scoped authorization, analyst approval, delegation tokens]
+    evidence: [authorization trace, tool policy test]
+  - threat_id: T016
+    scenario_id: s10_cloud_cost_optimization_agent
+    title: Agent cleanup recommendation cannot be attributed to approving user
+    category: Repudiation
+    ai_threat_type: action_repudiation
+    component: optimization-agent
+    asset_at_risk: [resource administration roles]
+    trust_boundary: [finance_to_ai, ai_to_privileged]
+    ai_specific: false
+    identified: true
+    valid: true
+    canonical_key: s10-action-repudiation
+    likelihood: 3
+    impact: 4
+    priority: High
+    cloud_factors: {privilege_boundary: 3, blast_radius: 3, persistence: 1, detectability: 2, reversibility: 3, compliance_sensitivity: 1}
+    mitigations: [approval logging, signed action requests, user confirmation]
+    evidence: [approval record, action trace replay]
+  - threat_id: T017
+    scenario_id: s11_data_science_notebook_assistant
+    title: Notebook assistant promotes unreviewed artifact to shared registry
+    category: Elevation of Privilege
+    ai_threat_type: notebook_privilege_escalation
+    component: assistant-runtime
+    asset_at_risk: [registry promotion credentials, experimental datasets]
+    trust_boundary: [research_to_ai, ai_to_artifact]
+    ai_specific: false
+    identified: true
+    valid: true
+    canonical_key: s11-unreviewed-promotion
+    likelihood: 3
+    impact: 5
+    priority: Critical
+    cloud_factors: {privilege_boundary: 4, blast_radius: 3, persistence: 2, detectability: 2, reversibility: 3, compliance_sensitivity: 2}
+    mitigations: [promotion approvals, notebook role hardening, provenance checks]
+    evidence: [promotion workflow test, registry audit trail]
+  - threat_id: T018
+    scenario_id: s12_sales_proposal_generator
+    title: Retrieved customer requirements trigger unauthorized CRM disclosure
+    category: Information Disclosure
+    ai_threat_type: prompt_injection
+    component: crm-connector
+    asset_at_risk: [customer opportunity data]
+    trust_boundary: [app_to_privileged]
+    ai_specific: true
+    identified: false
+    valid: true
+    canonical_key: s12-crm-disclosure
+    likelihood: 4
+    impact: 4
+    priority: Critical
+    cloud_factors: {privilege_boundary: 3, blast_radius: 3, persistence: 1, detectability: 2, reversibility: 2, compliance_sensitivity: 2}
+    mitigations: [retrieval sanitization, CRM scope limits, output review]
+    evidence: [connector authorization check, prompt abuse test]

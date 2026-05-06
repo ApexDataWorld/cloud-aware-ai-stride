@@ -1,0 +1,50 @@
+scenario_id: s11_data_science_notebook_assistant
+title: Data Science Notebook Assistant
+summary: Notebook-side assistant helps analysts query datasets, generate code, and register models from experimental workspaces.
+pipeline_type: mlops
+cloud: aws
+components:
+  - name: notebook
+    kind: user-interface
+    trust_zone: research
+    cloud_dependency: sagemaker
+  - name: assistant-runtime
+    kind: agent
+    trust_zone: ai
+    cloud_dependency: ecs
+  - name: model-registry
+    kind: registry
+    trust_zone: artifact
+    cloud_dependency: s3
+assets:
+  - name: experimental datasets
+    sensitivity: high
+    residency: single-region
+  - name: registry promotion credentials
+    sensitivity: regulated
+    residency: single-region
+trust_boundaries:
+  - source: research
+    target: ai
+    rationale: Notebook cells and prompts are sent to the assistant runtime.
+  - source: ai
+    target: artifact
+    rationale: Assistant outputs may promote artifacts toward shared registries.
+cloud_context:
+  provider: aws
+  identity_model: notebook_role
+  sensitive_data: true
+  regulated_data: possible
+  multi_tenant: false
+  network_exposure: internal
+expected_threat_categories:
+  - dataset_disclosure
+  - model_registry_tampering
+  - notebook_privilege_escalation
+  - weak_experiment_audit
+assumptions:
+  - Datasets are synthetic stand-ins.
+  - Promotion workflows are simulated, not connected to real registries.
+security_objectives:
+  - Protect dataset confidentiality and registry integrity.
+  - Limit notebook-to-production privilege escalation.

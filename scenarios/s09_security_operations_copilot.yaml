@@ -1,0 +1,50 @@
+scenario_id: s09_security_operations_copilot
+title: Security Operations Copilot
+summary: SOC analyst assistant summarizes alerts, recommends triage steps, and queries log/search tools.
+pipeline_type: mcp
+cloud: multi-cloud
+components:
+  - name: soc-console
+    kind: user-interface
+    trust_zone: enterprise
+    cloud_dependency: browser
+  - name: triage-agent
+    kind: agent
+    trust_zone: ai
+    cloud_dependency: kubernetes
+  - name: log-tool-router
+    kind: tool-broker
+    trust_zone: integration
+    cloud_dependency: api-gateway
+assets:
+  - name: alert telemetry
+    sensitivity: high
+    residency: multi-region
+  - name: response playbooks
+    sensitivity: high
+    residency: multi-region
+trust_boundaries:
+  - source: enterprise
+    target: ai
+    rationale: Analysts delegate investigative prompts into autonomous triage services.
+  - source: ai
+    target: integration
+    rationale: The copilot queries privileged search and response APIs.
+cloud_context:
+  provider: multi-cloud
+  identity_model: federated_workload_identity
+  sensitive_data: true
+  regulated_data: possible
+  multi_tenant: false
+  network_exposure: hybrid
+expected_threat_categories:
+  - tool_abuse
+  - sensitive_log_disclosure
+  - confused_deputy
+  - excessive_agency
+assumptions:
+  - Response actions are simulated for the benchmark.
+  - Synthetic telemetry stands in for real incident data.
+security_objectives:
+  - Constrain autonomous access to sensitive security tools.
+  - Ensure analyst-verifiable evidence for actions.

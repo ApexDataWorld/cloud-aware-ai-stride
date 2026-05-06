@@ -1,0 +1,54 @@
+scenario_id: s01_customer_support_chatbot
+title: Customer Support Chatbot
+summary: LLM-powered support assistant with retrieval over product documentation and ticket summaries.
+pipeline_type: rag
+cloud: aws
+components:
+  - name: web-chat
+    kind: user-interface
+    trust_zone: public
+    cloud_dependency: cloudfront
+  - name: orchestration-api
+    kind: application
+    trust_zone: app
+    cloud_dependency: ecs
+  - name: vector-store
+    kind: retrieval
+    trust_zone: data
+    cloud_dependency: opensearch
+  - name: foundation-model
+    kind: llm
+    trust_zone: ai
+    cloud_dependency: bedrock
+assets:
+  - name: support transcripts
+    sensitivity: moderate
+    residency: single-region
+  - name: internal runbooks
+    sensitivity: high
+    residency: single-region
+trust_boundaries:
+  - source: public
+    target: app
+    rationale: User traffic crosses internet-facing application gateway.
+  - source: app
+    target: data
+    rationale: Retrieval layer accesses indexed internal knowledge.
+cloud_context:
+  provider: aws
+  identity_model: service_roles
+  sensitive_data: true
+  regulated_data: none
+  multi_tenant: false
+  network_exposure: internet-facing
+expected_threat_categories:
+  - prompt_injection
+  - retrieval_poisoning
+  - support_data_disclosure
+  - session_spoofing
+assumptions:
+  - Synthetic support data only.
+  - Analysts review generated threat lists offline.
+security_objectives:
+  - Prevent prompt injection through retrieved content.
+  - Minimize disclosure of internal support procedures.

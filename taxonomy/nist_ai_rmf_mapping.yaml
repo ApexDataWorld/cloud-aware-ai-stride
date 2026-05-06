@@ -1,0 +1,25 @@
+framework: NIST AI RMF
+mapping:
+  govern:
+    linked_stride_categories:
+      - Repudiation
+      - Elevation of Privilege
+    cloud_aware_note: Governance controls frame approval, accountability, and acceptable agent authority.
+  map:
+    linked_stride_categories:
+      - Spoofing
+      - Tampering
+      - Information Disclosure
+    cloud_aware_note: System decomposition and trust-boundary mapping are central to Cloud-Aware STRIDE.
+  measure:
+    linked_stride_categories:
+      - Information Disclosure
+      - Denial of Service
+      - Repudiation
+    cloud_aware_note: Logging, evaluation evidence, and reproducibility metrics support measurable security claims.
+  manage:
+    linked_stride_categories:
+      - Tampering
+      - Repudiation
+      - Elevation of Privilege
+    cloud_aware_note: Mitigation backlogs and validation evidence connect design review to operational treatment.

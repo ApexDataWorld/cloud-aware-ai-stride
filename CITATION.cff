@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+title: "cloud-aware-ai-stride"
+message: "If you use this repository in research, please cite the repository and associated paper."
+type: software
+authors:
+  - family-names: Gupta
+    given-names: Saurabh
+repository-code: "https://github.com/saurabhgupta/cloud-aware-ai-stride"
+license: Apache-2.0
+version: 0.1.0
+date-released: 2026-05-05
+abstract: >
+  Reproducible Cloud-Aware STRIDE framework for threat modeling LLM, RAG,
+  MCP, MLOps, and cloud AI pipelines.

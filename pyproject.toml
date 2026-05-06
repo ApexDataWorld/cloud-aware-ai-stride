@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cloud-aware-ai-stride"
+version = "0.1.0"
+description = "Reproducible Cloud-Aware STRIDE framework for threat modeling LLM, RAG, MCP, MLOps, and cloud AI pipelines."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [
+  {name = "Saurabh Gupta"}
+]
+keywords = ["threat-modeling", "stride", "llm", "rag", "mlops", "security", "research"]
+dependencies = [
+  "numpy>=1.26",
+  "pydantic>=2.6",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+]
+
+[project.scripts]
+cloud-stride = "cloud_stride.cli:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["cloud_stride*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

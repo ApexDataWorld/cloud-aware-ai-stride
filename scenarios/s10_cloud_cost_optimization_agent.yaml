@@ -1,0 +1,50 @@
+scenario_id: s10_cloud_cost_optimization_agent
+title: Cloud Cost Optimization Agent
+summary: Agent reviews cloud bills and recommends rightsizing or cleanup actions across multiple subscriptions.
+pipeline_type: analytics
+cloud: multi-cloud
+components:
+  - name: billing-dashboard
+    kind: user-interface
+    trust_zone: finance
+    cloud_dependency: saas
+  - name: optimization-agent
+    kind: agent
+    trust_zone: ai
+    cloud_dependency: kubernetes
+  - name: cloud-admin-api
+    kind: external-system
+    trust_zone: privileged
+    cloud_dependency: cloud-provider-api
+assets:
+  - name: cloud billing exports
+    sensitivity: moderate
+    residency: cross-border
+  - name: resource administration roles
+    sensitivity: regulated
+    residency: cross-border
+trust_boundaries:
+  - source: finance
+    target: ai
+    rationale: Cost questions and approval requests are submitted to the agent.
+  - source: ai
+    target: privileged
+    rationale: Recommendations may reach high-impact administrative APIs.
+cloud_context:
+  provider: multi-cloud
+  identity_model: delegated_admin_roles
+  sensitive_data: true
+  regulated_data: possible
+  multi_tenant: true
+  network_exposure: hybrid
+expected_threat_categories:
+  - excessive_agency
+  - privilege_escalation
+  - action_repudiation
+  - cost_optimization_tampering
+assumptions:
+  - Recommended actions are synthetic and not executed automatically.
+  - Billing exports contain no real customer identifiers.
+security_objectives:
+  - Prevent overprivileged automation and unsafe cleanup actions.
+  - Preserve accountability for cost recommendations.

@@ -1,0 +1,201 @@
+study_id: synthetic-paper2-benchmark
+assessor: cloud_aware_stride
+scores:
+  -
+    threat_id: T001
+    title: Prompt injection through retrieved support article
+    category: Tampering
+    ai_threat_type: indirect_prompt_injection
+    base_severity: 16
+    cloud_adjusted_severity: 23
+    priority: High
+    ai_specific: True
+    identified: True
+    valid: True
+  -
+    threat_id: T002
+    title: Over-broad support runbook access
+    category: Information Disclosure
+    ai_threat_type: sensitive_context_leakage
+    base_severity: 12
+    cloud_adjusted_severity: 21
+    priority: High
+    ai_specific: False
+    identified: True
+    valid: True
+  -
+    threat_id: T003
+    title: Claims traceability gaps in managed inference logs
+    category: Repudiation
+    ai_threat_type: audit_gap
+    base_severity: 9
+    cloud_adjusted_severity: 18
+    priority: Moderate
+    ai_specific: False
+    identified: True
+    valid: True
+  -
+    threat_id: T004
+    title: Memorized claims content returned in unrelated session
+    category: Information Disclosure
+    ai_threat_type: inference_time_data_leakage
+    base_severity: 10
+    cloud_adjusted_severity: 24
+    priority: Critical
+    ai_specific: True
+    identified: True
+    valid: True
+  -
+    threat_id: T005
+    title: Upload bucket misconfiguration exposes draft board material
+    category: Information Disclosure
+    ai_threat_type: storage_misconfiguration
+    base_severity: 15
+    cloud_adjusted_severity: 27
+    priority: Critical
+    ai_specific: False
+    identified: True
+    valid: True
+  -
+    threat_id: T006
+    title: Weak logging on privileged tool actions
+    category: Repudiation
+    ai_threat_type: tool_call_repudiation
+    base_severity: 12
+    cloud_adjusted_severity: 22
+    priority: High
+    ai_specific: False
+    identified: True
+    valid: True
+  -
+    threat_id: T007
+    title: Forged MCP server identity triggers unsafe changes
+    category: Spoofing
+    ai_threat_type: tool_spoofing
+    base_severity: 20
+    cloud_adjusted_severity: 37
+    priority: Critical
+    ai_specific: True
+    identified: True
+    valid: True
+  -
+    threat_id: T008
+    title: Model artifact tampering in registry
+    category: Tampering
+    ai_threat_type: model_artifact_tampering
+    base_severity: 20
+    cloud_adjusted_severity: 38
+    priority: Critical
+    ai_specific: False
+    identified: True
+    valid: True
+  -
+    threat_id: T009
+    title: Poisoned evaluation dataset promotes unsafe model
+    category: Tampering
+    ai_threat_type: training_data_poisoning
+    base_severity: 15
+    cloud_adjusted_severity: 30
+    priority: Critical
+    ai_specific: True
+    identified: True
+    valid: True
+  -
+    threat_id: T010
+    title: Cross-tenant query path bypasses row filters
+    category: Elevation of Privilege
+    ai_threat_type: cross_tenant_privilege_escalation
+    base_severity: 15
+    cloud_adjusted_severity: 33
+    priority: Critical
+    ai_specific: False
+    identified: True
+    valid: True
+  -
+    threat_id: T011
+    title: Generated query leaks neighboring tenant aggregates
+    category: Information Disclosure
+    ai_threat_type: generated_query_leakage
+    base_severity: 16
+    cloud_adjusted_severity: 31
+    priority: Critical
+    ai_specific: True
+    identified: True
+    valid: True
+  -
+    threat_id: T012
+    title: Duplicate cross-tenant leakage finding
+    category: Information Disclosure
+    ai_threat_type: duplicate_reporting
+    base_severity: 12
+    cloud_adjusted_severity: 25
+    priority: High
+    ai_specific: False
+    identified: False
+    valid: True
+  -
+    threat_id: T013
+    title: Suggested command sequence exfiltrates repository secrets
+    category: Tampering
+    ai_threat_type: insecure_output_handling
+    base_severity: 20
+    cloud_adjusted_severity: 34
+    priority: Critical
+    ai_specific: True
+    identified: True
+    valid: True
+  -
+    threat_id: T014
+    title: Poisoned policy snippet changes benefits guidance
+    category: Tampering
+    ai_threat_type: retrieval_poisoning
+    base_severity: 12
+    cloud_adjusted_severity: 25
+    priority: High
+    ai_specific: True
+    identified: True
+    valid: True
+  -
+    threat_id: T015
+    title: Confused deputy lets triage agent access privileged response APIs
+    category: Elevation of Privilege
+    ai_threat_type: confused_deputy
+    base_severity: 20
+    cloud_adjusted_severity: 37
+    priority: Critical
+    ai_specific: True
+    identified: True
+    valid: True
+  -
+    threat_id: T016
+    title: Agent cleanup recommendation cannot be attributed to approving user
+    category: Repudiation
+    ai_threat_type: action_repudiation
+    base_severity: 12
+    cloud_adjusted_severity: 25
+    priority: High
+    ai_specific: False
+    identified: True
+    valid: True
+  -
+    threat_id: T017
+    title: Notebook assistant promotes unreviewed artifact to shared registry
+    category: Elevation of Privilege
+    ai_threat_type: notebook_privilege_escalation
+    base_severity: 15
+    cloud_adjusted_severity: 31
+    priority: Critical
+    ai_specific: False
+    identified: True
+    valid: True
+  -
+    threat_id: T018
+    title: Retrieved customer requirements trigger unauthorized CRM disclosure
+    category: Information Disclosure
+    ai_threat_type: prompt_injection
+    base_severity: 16
+    cloud_adjusted_severity: 29
+    priority: Critical
+    ai_specific: True
+    identified: True
+    valid: True

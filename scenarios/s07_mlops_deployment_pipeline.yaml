@@ -1,0 +1,57 @@
+scenario_id: s07_mlops_deployment_pipeline
+title: MLOps Deployment Pipeline
+summary: CI/CD pipeline builds, validates, registers, and deploys model artifacts into managed inference services.
+pipeline_type: mlops
+cloud: multi-cloud
+components:
+  - name: source-control
+    kind: repository
+    trust_zone: engineering
+    cloud_dependency: github
+  - name: training-runner
+    kind: compute
+    trust_zone: build
+    cloud_dependency: kubernetes
+  - name: model-registry
+    kind: registry
+    trust_zone: artifact
+    cloud_dependency: s3
+  - name: deployment-gate
+    kind: release
+    trust_zone: production
+    cloud_dependency: argo
+assets:
+  - name: model artifacts
+    sensitivity: high
+    residency: multi-region
+  - name: pipeline credentials
+    sensitivity: regulated
+    residency: multi-region
+trust_boundaries:
+  - source: engineering
+    target: build
+    rationale: Code and configuration are promoted into automated runs.
+  - source: build
+    target: artifact
+    rationale: Trained models move into registries before production.
+  - source: artifact
+    target: production
+    rationale: Approved models reach inference environments.
+cloud_context:
+  provider: multi-cloud
+  identity_model: federated_workload_identity
+  sensitive_data: true
+  regulated_data: possible
+  multi_tenant: false
+  network_exposure: hybrid
+expected_threat_categories:
+  - model_artifact_tampering
+  - training_data_poisoning
+  - pipeline_privilege_escalation
+  - registry_repudiation
+assumptions:
+  - Examples focus on deployment governance, not actual cloud access.
+  - Supply chain and privilege escalation are first-class threats.
+security_objectives:
+  - Prevent tampering with model artifacts.
+  - Reduce blast radius of pipeline credential misuse.

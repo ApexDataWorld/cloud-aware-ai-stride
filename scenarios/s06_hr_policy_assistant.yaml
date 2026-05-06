@@ -1,0 +1,50 @@
+scenario_id: s06_hr_policy_assistant
+title: HR Policy Assistant
+summary: Internal HR assistant answers policy questions using retrieval over handbook and benefits content.
+pipeline_type: rag
+cloud: azure
+components:
+  - name: employee-portal
+    kind: user-interface
+    trust_zone: enterprise
+    cloud_dependency: app-service
+  - name: rag-orchestrator
+    kind: application
+    trust_zone: app
+    cloud_dependency: functions
+  - name: vector-index
+    kind: retrieval
+    trust_zone: data
+    cloud_dependency: ai-search
+assets:
+  - name: benefits guidance
+    sensitivity: moderate
+    residency: single-region
+  - name: employee policy records
+    sensitivity: high
+    residency: single-region
+trust_boundaries:
+  - source: enterprise
+    target: app
+    rationale: Employee identity and requests enter the assistant workflow.
+  - source: app
+    target: data
+    rationale: The assistant retrieves policy snippets and metadata.
+cloud_context:
+  provider: azure
+  identity_model: managed_identity
+  sensitive_data: true
+  regulated_data: possible
+  multi_tenant: false
+  network_exposure: internal
+expected_threat_categories:
+  - retrieval_poisoning
+  - policy_disclosure
+  - employee_spoofing
+  - audit_repudiation
+assumptions:
+  - Policy content is synthetic and non-sensitive.
+  - The assistant offers guidance only and does not alter HR systems.
+security_objectives:
+  - Prevent unauthorized disclosure of internal policy interpretations.
+  - Preserve trustworthy retrieval and audit trails.
