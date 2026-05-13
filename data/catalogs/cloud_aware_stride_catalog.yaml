@@ -1,0 +1,265 @@
+threats:
+  - threat_id: T001
+    threat_name: Forged MCP server identity
+    stride_category: Spoofing
+    ai_threat_type: forged_mcp_server_identity
+    affected_component: mcp_server
+    affected_data_flow: orchestrator_to_mcp_server
+    trust_boundary: orchestrator_to_tool_layer
+    baseline_likelihood: 3
+    baseline_impact: 4
+    cloud_modifiers:
+      privilege_boundary: 3
+      blast_radius: 2
+      persistence: 1
+      detectability_penalty: 2
+      reversibility_penalty: 1
+      compliance_sensitivity: 2
+    example_controls: [oauth_oidc_identity_binding, mcp_gateway_policy_enforcement_point, fail_closed_high_risk_tools]
+    evidence_required: [server_identity_validation_log, tool_registry_review]
+    applicable_scenarios: [S05, S10]
+    baseline_visible: false
+    critical: true
+    synthetic: true
+  - threat_id: T002
+    threat_name: Impersonated workload identity
+    stride_category: Spoofing
+    ai_threat_type: impersonated_workload_identity
+    affected_component: workload_identity
+    affected_data_flow: pipeline_to_registry
+    trust_boundary: cicd_to_model_registry
+    baseline_likelihood: 3
+    baseline_impact: 5
+    cloud_modifiers:
+      privilege_boundary: 4
+      blast_radius: 3
+      persistence: 2
+      detectability_penalty: 2
+      reversibility_penalty: 2
+      compliance_sensitivity: 2
+    example_controls: [workload_identity_federation, abac_authorization, structured_audit_logging]
+    evidence_required: [identity_binding_log, workload_identity_review]
+    applicable_scenarios: [S08, S10]
+    baseline_visible: false
+    critical: true
+    synthetic: true
+  - threat_id: T003
+    threat_name: Indirect prompt injection
+    stride_category: Tampering
+    ai_threat_type: indirect_prompt_injection
+    affected_component: retrieval_pipeline
+    affected_data_flow: retriever_to_llm
+    trust_boundary: application_to_llm_provider
+    baseline_likelihood: 4
+    baseline_impact: 4
+    cloud_modifiers:
+      privilege_boundary: 2
+      blast_radius: 2
+      persistence: 1
+      detectability_penalty: 2
+      reversibility_penalty: 1
+      compliance_sensitivity: 1
+    example_controls: [response_filtering, approval_gate, structured_audit_logging]
+    evidence_required: [prompt_trace_log, retrieved_context_review]
+    applicable_scenarios: [S01]
+    baseline_visible: false
+    critical: false
+    synthetic: true
+  - threat_id: T004
+    threat_name: Retrieval poisoning
+    stride_category: Tampering
+    ai_threat_type: retrieval_poisoning
+    affected_component: vector_database
+    affected_data_flow: retriever_to_vector_database
+    trust_boundary: application_to_vector_database
+    baseline_likelihood: 3
+    baseline_impact: 4
+    cloud_modifiers:
+      privilege_boundary: 2
+      blast_radius: 2
+      persistence: 3
+      detectability_penalty: 2
+      reversibility_penalty: 2
+      compliance_sensitivity: 1
+    example_controls: [structured_audit_logging, opentelemetry_traceability, response_filtering]
+    evidence_required: [document_provenance_log, retriever_trace]
+    applicable_scenarios: [S02, S06, S09]
+    baseline_visible: false
+    critical: false
+    synthetic: true
+  - threat_id: T005
+    threat_name: Model artifact replacement
+    stride_category: Tampering
+    ai_threat_type: model_artifact_replacement
+    affected_component: model_registry
+    affected_data_flow: pipeline_to_registry
+    trust_boundary: cicd_to_model_registry
+    baseline_likelihood: 3
+    baseline_impact: 5
+    cloud_modifiers:
+      privilege_boundary: 4
+      blast_radius: 3
+      persistence: 3
+      detectability_penalty: 2
+      reversibility_penalty: 3
+      compliance_sensitivity: 2
+    example_controls: [approval_gate, structured_audit_logging, fail_closed_high_risk_tools]
+    evidence_required: [registry_audit_log, deployment_approval_record]
+    applicable_scenarios: [S08]
+    baseline_visible: true
+    critical: true
+    synthetic: true
+  - threat_id: T006
+    threat_name: Missing tool call audit trail
+    stride_category: Repudiation
+    ai_threat_type: missing_tool_call_audit_trail
+    affected_component: audit_log
+    affected_data_flow: orchestrator_to_approval_queue
+    trust_boundary: application_to_human_review
+    baseline_likelihood: 3
+    baseline_impact: 3
+    cloud_modifiers:
+      privilege_boundary: 1
+      blast_radius: 1
+      persistence: 2
+      detectability_penalty: 2
+      reversibility_penalty: 2
+      compliance_sensitivity: 2
+    example_controls: [structured_audit_logging, opentelemetry_traceability, approval_gate]
+    evidence_required: [audit_log_review, trace_sample]
+    applicable_scenarios: [S05, S12]
+    baseline_visible: true
+    critical: true
+    synthetic: true
+  - threat_id: T007
+    threat_name: Sensitive context leakage
+    stride_category: Information Disclosure
+    ai_threat_type: sensitive_context_leakage
+    affected_component: llm_endpoint
+    affected_data_flow: orchestrator_to_llm
+    trust_boundary: application_to_llm_provider
+    baseline_likelihood: 4
+    baseline_impact: 5
+    cloud_modifiers:
+      privilege_boundary: 2
+      blast_radius: 3
+      persistence: 1
+      detectability_penalty: 2
+      reversibility_penalty: 2
+      compliance_sensitivity: 3
+    example_controls: [response_filtering, approval_gate, structured_audit_logging]
+    evidence_required: [output_review_log, prompt_trace_log]
+    applicable_scenarios: [S01, S02, S03, S04, S06, S07, S11]
+    baseline_visible: true
+    critical: true
+    synthetic: true
+  - threat_id: T008
+    threat_name: Embedding metadata leakage
+    stride_category: Information Disclosure
+    ai_threat_type: embedding_metadata_leakage
+    affected_component: embedding_service
+    affected_data_flow: retriever_to_embedding_service
+    trust_boundary: application_to_embedding_service
+    baseline_likelihood: 3
+    baseline_impact: 4
+    cloud_modifiers:
+      privilege_boundary: 2
+      blast_radius: 2
+      persistence: 2
+      detectability_penalty: 2
+      reversibility_penalty: 2
+      compliance_sensitivity: 2
+    example_controls: [abac_authorization, structured_audit_logging, opentelemetry_traceability]
+    evidence_required: [embedding_access_log, vector_index_review]
+    applicable_scenarios: [S09]
+    baseline_visible: false
+    critical: true
+    synthetic: true
+  - threat_id: T009
+    threat_name: Model resource exhaustion
+    stride_category: Denial of Service
+    ai_threat_type: model_resource_exhaustion
+    affected_component: llm_endpoint
+    affected_data_flow: orchestrator_to_llm
+    trust_boundary: application_to_llm_provider
+    baseline_likelihood: 3
+    baseline_impact: 4
+    cloud_modifiers:
+      privilege_boundary: 1
+      blast_radius: 2
+      persistence: 1
+      detectability_penalty: 1
+      reversibility_penalty: 1
+      compliance_sensitivity: 1
+    example_controls: [rate_limit, fail_closed_high_risk_tools, structured_audit_logging]
+    evidence_required: [rate_limit_log, provider_usage_review]
+    applicable_scenarios: [S03, S11]
+    baseline_visible: true
+    critical: false
+    synthetic: true
+  - threat_id: T010
+    threat_name: Retrieval amplification
+    stride_category: Denial of Service
+    ai_threat_type: retrieval_amplification
+    affected_component: retrieval_pipeline
+    affected_data_flow: orchestrator_to_retriever
+    trust_boundary: application_to_vector_database
+    baseline_likelihood: 3
+    baseline_impact: 3
+    cloud_modifiers:
+      privilege_boundary: 1
+      blast_radius: 2
+      persistence: 1
+      detectability_penalty: 1
+      reversibility_penalty: 1
+      compliance_sensitivity: 1
+    example_controls: [rate_limit, tool_metadata_risk_tiering, opentelemetry_traceability]
+    evidence_required: [retrieval_load_trace, vector_query_review]
+    applicable_scenarios: [S07]
+    baseline_visible: false
+    critical: false
+    synthetic: true
+  - threat_id: T011
+    threat_name: Excessive agency
+    stride_category: Elevation of Privilege
+    ai_threat_type: excessive_agency
+    affected_component: orchestrator
+    affected_data_flow: user_prompt_to_orchestrator
+    trust_boundary: user_to_application
+    baseline_likelihood: 4
+    baseline_impact: 5
+    cloud_modifiers:
+      privilege_boundary: 3
+      blast_radius: 3
+      persistence: 1
+      detectability_penalty: 2
+      reversibility_penalty: 2
+      compliance_sensitivity: 2
+    example_controls: [approval_gate, abac_authorization, fail_closed_high_risk_tools]
+    evidence_required: [approval_decision_log, policy_enforcement_record]
+    applicable_scenarios: [S04, S10, S12]
+    baseline_visible: false
+    critical: true
+    synthetic: true
+  - threat_id: T012
+    threat_name: Confused deputy through MCP tool
+    stride_category: Elevation of Privilege
+    ai_threat_type: confused_deputy_through_mcp_tool
+    affected_component: mcp_gateway
+    affected_data_flow: orchestrator_to_mcp_server
+    trust_boundary: orchestrator_to_tool_layer
+    baseline_likelihood: 4
+    baseline_impact: 5
+    cloud_modifiers:
+      privilege_boundary: 4
+      blast_radius: 3
+      persistence: 1
+      detectability_penalty: 2
+      reversibility_penalty: 2
+      compliance_sensitivity: 2
+    example_controls: [mcp_gateway_policy_enforcement_point, oauth_oidc_identity_binding, fail_closed_high_risk_tools]
+    evidence_required: [gateway_policy_decision_log, tool_authorization_review]
+    applicable_scenarios: [S05]
+    baseline_visible: false
+    critical: true
+    synthetic: true

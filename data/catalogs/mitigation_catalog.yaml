@@ -1,0 +1,61 @@
+mitigations:
+  - control_id: C001
+    control_name: MCP gateway policy enforcement point
+    control_key: mcp_gateway_policy_enforcement_point
+    control_family: runtime_authorization
+    synthetic: true
+  - control_id: C002
+    control_name: OAuth/OIDC identity binding
+    control_key: oauth_oidc_identity_binding
+    control_family: identity_binding
+    synthetic: true
+  - control_id: C003
+    control_name: Workload identity federation
+    control_key: workload_identity_federation
+    control_family: identity_binding
+    synthetic: true
+  - control_id: C004
+    control_name: ABAC authorization
+    control_key: abac_authorization
+    control_family: authorization
+    synthetic: true
+  - control_id: C005
+    control_name: OPA/Rego policy evaluation
+    control_key: opa_rego_policy_evaluation
+    control_family: policy_decision
+    synthetic: true
+  - control_id: C006
+    control_name: Tool metadata risk tiering
+    control_key: tool_metadata_risk_tiering
+    control_family: tool_governance
+    synthetic: true
+  - control_id: C007
+    control_name: Structured audit logging
+    control_key: structured_audit_logging
+    control_family: observability
+    synthetic: true
+  - control_id: C008
+    control_name: OpenTelemetry traceability
+    control_key: opentelemetry_traceability
+    control_family: observability
+    synthetic: true
+  - control_id: C009
+    control_name: Approval gate
+    control_key: approval_gate
+    control_family: human_governance
+    synthetic: true
+  - control_id: C010
+    control_name: Rate limit
+    control_key: rate_limit
+    control_family: availability
+    synthetic: true
+  - control_id: C011
+    control_name: Response filtering
+    control_key: response_filtering
+    control_family: output_control
+    synthetic: true
+  - control_id: C012
+    control_name: Fail closed for high-risk tool calls
+    control_key: fail_closed_high_risk_tools
+    control_family: fail_safe
+    synthetic: true

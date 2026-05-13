@@ -1,0 +1,13 @@
+expected_ai_threats:
+  S01: [indirect_prompt_injection, sensitive_context_leakage]
+  S02: [sensitive_context_leakage, retrieval_poisoning]
+  S03: [sensitive_context_leakage, model_resource_exhaustion]
+  S04: [excessive_agency, sensitive_context_leakage]
+  S05: [forged_mcp_server_identity, confused_deputy_through_mcp_tool]
+  S06: [retrieval_poisoning, sensitive_context_leakage]
+  S07: [retrieval_amplification, sensitive_context_leakage]
+  S08: [model_artifact_replacement, impersonated_workload_identity]
+  S09: [embedding_metadata_leakage, retrieval_poisoning]
+  S10: [impersonated_workload_identity, excessive_agency]
+  S11: [sensitive_context_leakage, model_resource_exhaustion]
+  S12: [missing_tool_call_audit_trail, excessive_agency]

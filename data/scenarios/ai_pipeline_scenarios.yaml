@@ -1,0 +1,121 @@
+scenarios:
+  - scenario_id: S01
+    scenario_name: Customer support chatbot
+    business_context: Synthetic customer support AI assistant using retrieved support articles.
+    components: [user_client, api_gateway, orchestrator, prompt_template, retrieval_pipeline, vector_database, llm_endpoint, audit_log]
+    assets: [support_articles, user_profile, prompt_logs]
+    trust_boundaries: [user_to_application, application_to_vector_database, application_to_llm_provider]
+    data_flows: [user_prompt_to_orchestrator, orchestrator_to_retriever, retriever_to_vector_database, orchestrator_to_llm]
+    expected_ai_threats: [indirect_prompt_injection, sensitive_context_leakage]
+    expected_critical_threats: [sensitive_context_leakage]
+    synthetic: true
+  - scenario_id: S02
+    scenario_name: Healthcare claims assistant
+    business_context: Synthetic claims-review assistant using structured claim records and policy retrieval.
+    components: [claims_portal, api_gateway, orchestrator, retrieval_pipeline, vector_database, llm_endpoint, audit_log]
+    assets: [claims_records, policy_snippets, prompt_logs]
+    trust_boundaries: [analyst_to_application, application_to_vector_database, application_to_llm_provider]
+    data_flows: [analyst_query_to_orchestrator, orchestrator_to_retriever, retriever_to_vector_database, orchestrator_to_llm]
+    expected_ai_threats: [sensitive_context_leakage, retrieval_poisoning]
+    expected_critical_threats: [sensitive_context_leakage]
+    synthetic: true
+  - scenario_id: S03
+    scenario_name: Financial document summarizer
+    business_context: Synthetic summarization workflow for internal finance reports and briefing notes.
+    components: [document_uploader, api_gateway, orchestrator, retrieval_pipeline, llm_endpoint, audit_log]
+    assets: [financial_reports, summary_outputs, prompt_logs]
+    trust_boundaries: [user_to_application, application_to_storage, application_to_llm_provider]
+    data_flows: [document_to_orchestrator, orchestrator_to_storage, orchestrator_to_llm]
+    expected_ai_threats: [sensitive_context_leakage, model_resource_exhaustion]
+    expected_critical_threats: [sensitive_context_leakage]
+    synthetic: true
+  - scenario_id: S04
+    scenario_name: Code generation assistant
+    business_context: Synthetic internal developer copilot that suggests code and shell commands.
+    components: [developer_client, api_gateway, orchestrator, prompt_template, llm_endpoint, audit_log]
+    assets: [source_code, build_tokens, prompt_logs]
+    trust_boundaries: [developer_to_application, application_to_llm_provider]
+    data_flows: [developer_prompt_to_orchestrator, orchestrator_to_llm]
+    expected_ai_threats: [excessive_agency, sensitive_context_leakage]
+    expected_critical_threats: [excessive_agency]
+    synthetic: true
+  - scenario_id: S05
+    scenario_name: MCP enterprise agent
+    business_context: Synthetic enterprise assistant using MCP tools for internal business actions.
+    components: [user_client, api_gateway, orchestrator, mcp_gateway, mcp_server, tool_registry, llm_endpoint, audit_log]
+    assets: [tool_tokens, change_requests, tool_logs]
+    trust_boundaries: [user_to_application, orchestrator_to_tool_layer, tool_layer_to_saas]
+    data_flows: [user_prompt_to_orchestrator, orchestrator_to_mcp_server, mcp_server_to_enterprise_tool]
+    expected_ai_threats: [forged_mcp_server_identity, confused_deputy_through_mcp_tool]
+    expected_critical_threats: [confused_deputy_through_mcp_tool]
+    synthetic: true
+  - scenario_id: S06
+    scenario_name: HR policy assistant
+    business_context: Synthetic HR assistant that retrieves internal policy text for employee questions.
+    components: [employee_portal, api_gateway, orchestrator, retrieval_pipeline, vector_database, llm_endpoint, audit_log]
+    assets: [hr_policy_docs, employee_questions, prompt_logs]
+    trust_boundaries: [employee_to_application, application_to_vector_database, application_to_llm_provider]
+    data_flows: [employee_query_to_orchestrator, orchestrator_to_retriever, retriever_to_vector_database, orchestrator_to_llm]
+    expected_ai_threats: [retrieval_poisoning, sensitive_context_leakage]
+    expected_critical_threats: [sensitive_context_leakage]
+    synthetic: true
+  - scenario_id: S07
+    scenario_name: Legal contract reviewer
+    business_context: Synthetic contract analysis assistant used for clause summarization and risk spotting.
+    components: [review_portal, api_gateway, orchestrator, retrieval_pipeline, llm_endpoint, audit_log]
+    assets: [contracts, clause_library, summary_notes]
+    trust_boundaries: [reviewer_to_application, application_to_document_store, application_to_llm_provider]
+    data_flows: [document_to_orchestrator, orchestrator_to_retriever, orchestrator_to_llm]
+    expected_ai_threats: [retrieval_amplification, sensitive_context_leakage]
+    expected_critical_threats: [sensitive_context_leakage]
+    synthetic: true
+  - scenario_id: S08
+    scenario_name: MLOps model deployment pipeline
+    business_context: Synthetic MLOps pipeline for model packaging, approval, and deployment promotion.
+    components: [source_repo, cicd_runner, model_registry, deployment_gate, workload_identity, audit_log]
+    assets: [model_artifacts, deployment_credentials, evaluation_reports]
+    trust_boundaries: [developer_to_cicd, cicd_to_model_registry, cicd_to_production]
+    data_flows: [commit_to_pipeline, pipeline_to_registry, registry_to_deployment]
+    expected_ai_threats: [model_artifact_replacement, impersonated_workload_identity]
+    expected_critical_threats: [model_artifact_replacement]
+    synthetic: true
+  - scenario_id: S09
+    scenario_name: Vector search knowledge base
+    business_context: Synthetic enterprise knowledge base using embeddings and vector search.
+    components: [user_client, api_gateway, retrieval_pipeline, embedding_service, vector_database, llm_endpoint, audit_log]
+    assets: [embeddings, indexed_documents, prompt_logs]
+    trust_boundaries: [user_to_application, application_to_embedding_service, application_to_vector_database]
+    data_flows: [query_to_retriever, retriever_to_embedding_service, embedding_to_vector_database, retriever_to_llm]
+    expected_ai_threats: [embedding_metadata_leakage, retrieval_poisoning]
+    expected_critical_threats: [embedding_metadata_leakage]
+    synthetic: true
+  - scenario_id: S10
+    scenario_name: Cloud AI workflow agent
+    business_context: Synthetic cloud operations agent that recommends or triggers workflow actions.
+    components: [operator_console, api_gateway, orchestrator, mcp_gateway, cloud_workflow_tool, workload_identity, audit_log]
+    assets: [workflow_tokens, workflow_state, action_logs]
+    trust_boundaries: [operator_to_application, orchestrator_to_tool_layer, tool_layer_to_cloud_control_plane]
+    data_flows: [operator_prompt_to_orchestrator, orchestrator_to_tool, tool_to_cloud_workflow]
+    expected_ai_threats: [impersonated_workload_identity, excessive_agency]
+    expected_critical_threats: [impersonated_workload_identity]
+    synthetic: true
+  - scenario_id: S11
+    scenario_name: Customer analytics assistant
+    business_context: Synthetic analytics assistant over customer event and segmentation data.
+    components: [analyst_client, api_gateway, orchestrator, retrieval_pipeline, vector_database, llm_endpoint, audit_log]
+    assets: [customer_events, derived_segments, prompt_logs]
+    trust_boundaries: [analyst_to_application, application_to_analytics_store, application_to_llm_provider]
+    data_flows: [analyst_prompt_to_orchestrator, orchestrator_to_analytics_store, orchestrator_to_llm]
+    expected_ai_threats: [sensitive_context_leakage, model_resource_exhaustion]
+    expected_critical_threats: [sensitive_context_leakage]
+    synthetic: true
+  - scenario_id: S12
+    scenario_name: Human escalation workflow
+    business_context: Synthetic AI workflow with approval gates and human review handoff.
+    components: [user_client, api_gateway, orchestrator, approval_queue, reviewer_console, llm_endpoint, audit_log]
+    assets: [approval_records, escalated_cases, prompt_logs]
+    trust_boundaries: [user_to_application, application_to_human_review, application_to_llm_provider]
+    data_flows: [user_prompt_to_orchestrator, orchestrator_to_approval_queue, approval_queue_to_reviewer, orchestrator_to_llm]
+    expected_ai_threats: [missing_tool_call_audit_trail, excessive_agency]
+    expected_critical_threats: [missing_tool_call_audit_trail]
+    synthetic: true

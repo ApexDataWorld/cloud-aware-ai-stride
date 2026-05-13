@@ -1,0 +1,41 @@
+name: Reproduce Cloud-Aware STRIDE Experiments
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test-and-reproduce:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install package
+        run: pip install -e .
+
+      - name: Run tests
+        run: pytest tests/
+
+      - name: Run all experiments
+        run: python -m experiments.run_all_experiments
+
+      - name: Verify generated artifacts
+        run: |
+          test -f reports/tables/threat_coverage.csv
+          test -f reports/tables/mitigation_mapping.csv
+          test -f reports/tables/residual_risk_ranking.csv
+          test -f reports/tables/scenario_coverage.csv
+          test -f reports/generated_results/summary.md
+          test -f reports/figures/threat_count_coverage.png
+          test -f reports/figures/recall_comparison.png
+          test -f reports/figures/residual_risk_ranking.png
+          test -f reports/figures/mitigation_mapping_completeness.png

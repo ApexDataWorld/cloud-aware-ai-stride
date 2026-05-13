@@ -1,0 +1,73 @@
+controls:
+  - control_id: C001
+    control_name: MCP gateway policy enforcement point
+    control_family: runtime_authorization
+    estimated_effectiveness: 0.70
+    basis: synthetic_assumption
+    notes: Used for lightweight residual-risk prioritization only.
+  - control_id: C002
+    control_name: OAuth/OIDC identity binding
+    control_family: identity_binding
+    estimated_effectiveness: 0.65
+    basis: synthetic_assumption
+    notes: Used for lightweight residual-risk prioritization only.
+  - control_id: C003
+    control_name: Workload identity federation
+    control_family: identity_binding
+    estimated_effectiveness: 0.68
+    basis: synthetic_assumption
+    notes: Used for lightweight residual-risk prioritization only.
+  - control_id: C004
+    control_name: ABAC authorization
+    control_family: authorization
+    estimated_effectiveness: 0.62
+    basis: synthetic_assumption
+    notes: Used for lightweight residual-risk prioritization only.
+  - control_id: C005
+    control_name: OPA/Rego policy evaluation
+    control_family: policy_decision
+    estimated_effectiveness: 0.64
+    basis: synthetic_assumption
+    notes: Used for lightweight residual-risk prioritization only.
+  - control_id: C006
+    control_name: Tool metadata risk tiering
+    control_family: tool_governance
+    estimated_effectiveness: 0.50
+    basis: synthetic_assumption
+    notes: Used for lightweight residual-risk prioritization only.
+  - control_id: C007
+    control_name: Structured audit logging
+    control_family: observability
+    estimated_effectiveness: 0.45
+    basis: synthetic_assumption
+    notes: Used for lightweight residual-risk prioritization only.
+  - control_id: C008
+    control_name: OpenTelemetry traceability
+    control_family: observability
+    estimated_effectiveness: 0.43
+    basis: synthetic_assumption
+    notes: Used for lightweight residual-risk prioritization only.
+  - control_id: C009
+    control_name: Approval gate
+    control_family: human_governance
+    estimated_effectiveness: 0.72
+    basis: synthetic_assumption
+    notes: Used for lightweight residual-risk prioritization only.
+  - control_id: C010
+    control_name: Rate limit
+    control_family: availability
+    estimated_effectiveness: 0.55
+    basis: synthetic_assumption
+    notes: Used for lightweight residual-risk prioritization only.
+  - control_id: C011
+    control_name: Response filtering
+    control_family: output_control
+    estimated_effectiveness: 0.52
+    basis: synthetic_assumption
+    notes: Used for lightweight residual-risk prioritization only.
+  - control_id: C012
+    control_name: Fail closed for high-risk tool calls
+    control_family: fail_safe
+    estimated_effectiveness: 0.75
+    basis: synthetic_assumption
+    notes: Used for lightweight residual-risk prioritization only.

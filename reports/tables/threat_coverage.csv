@@ -1,0 +1,3 @@
+method,valid_threat_count,unique_valid_threat_count,ai_specific_recall,critical_threat_recall,duplicate_rate,mean_cloud_severity,synthetic_label
+baseline_stride,12,4,0.3333333333333333,0.42857142857142855,0.0,28.25,synthetic
+cloud_aware_stride,26,12,1.0,1.0,0.0,27.5,synthetic

@@ -1,0 +1,39 @@
+method,scenario_id,threat_id,threat_name,ai_threat_type,cloud_severity,mitigation_coverage,control_effectiveness,residual_risk,expected_loss,residual_expected_loss,synthetic_label
+baseline_stride,S01,T007,Sensitive context leakage,sensitive_context_leakage,33.0,1.0,0.6008333333333332,13.172500000000003,4.0,1.5966666666666671,synthetic
+baseline_stride,S02,T007,Sensitive context leakage,sensitive_context_leakage,33.0,1.0,0.6008333333333332,13.172500000000003,4.0,1.5966666666666671,synthetic
+baseline_stride,S03,T007,Sensitive context leakage,sensitive_context_leakage,33.0,1.0,0.6008333333333332,13.172500000000003,4.0,1.5966666666666671,synthetic
+baseline_stride,S04,T007,Sensitive context leakage,sensitive_context_leakage,33.0,1.0,0.6008333333333332,13.172500000000003,4.0,1.5966666666666671,synthetic
+baseline_stride,S06,T007,Sensitive context leakage,sensitive_context_leakage,33.0,1.0,0.6008333333333332,13.172500000000003,4.0,1.5966666666666671,synthetic
+baseline_stride,S07,T007,Sensitive context leakage,sensitive_context_leakage,33.0,1.0,0.6008333333333332,13.172500000000003,4.0,1.5966666666666671,synthetic
+baseline_stride,S11,T007,Sensitive context leakage,sensitive_context_leakage,33.0,1.0,0.6008333333333332,13.172500000000003,4.0,1.5966666666666671,synthetic
+baseline_stride,S08,T005,Model artifact replacement,model_artifact_replacement,32.0,1.0,0.6008333333333332,12.773333333333337,3.0,1.1975000000000002,synthetic
+baseline_stride,S05,T006,Missing tool call audit trail,missing_tool_call_audit_trail,19.0,1.0,0.6008333333333332,7.584166666666669,1.7999999999999998,0.7185000000000001,synthetic
+baseline_stride,S12,T006,Missing tool call audit trail,missing_tool_call_audit_trail,19.0,1.0,0.6008333333333332,7.584166666666669,1.7999999999999998,0.7185000000000001,synthetic
+baseline_stride,S03,T009,Model resource exhaustion,model_resource_exhaustion,19.0,1.0,0.6008333333333332,7.584166666666669,2.4,0.9580000000000002,synthetic
+baseline_stride,S11,T009,Model resource exhaustion,model_resource_exhaustion,19.0,1.0,0.6008333333333332,7.584166666666669,2.4,0.9580000000000002,synthetic
+cloud_aware_stride,S05,T012,Confused deputy through MCP tool,confused_deputy_through_mcp_tool,34.0,1.0,0.6008333333333332,13.57166666666667,4.0,1.5966666666666671,synthetic
+cloud_aware_stride,S01,T007,Sensitive context leakage,sensitive_context_leakage,33.0,1.0,0.6008333333333332,13.172500000000003,4.0,1.5966666666666671,synthetic
+cloud_aware_stride,S02,T007,Sensitive context leakage,sensitive_context_leakage,33.0,1.0,0.6008333333333332,13.172500000000003,4.0,1.5966666666666671,synthetic
+cloud_aware_stride,S03,T007,Sensitive context leakage,sensitive_context_leakage,33.0,1.0,0.6008333333333332,13.172500000000003,4.0,1.5966666666666671,synthetic
+cloud_aware_stride,S04,T007,Sensitive context leakage,sensitive_context_leakage,33.0,1.0,0.6008333333333332,13.172500000000003,4.0,1.5966666666666671,synthetic
+cloud_aware_stride,S06,T007,Sensitive context leakage,sensitive_context_leakage,33.0,1.0,0.6008333333333332,13.172500000000003,4.0,1.5966666666666671,synthetic
+cloud_aware_stride,S07,T007,Sensitive context leakage,sensitive_context_leakage,33.0,1.0,0.6008333333333332,13.172500000000003,4.0,1.5966666666666671,synthetic
+cloud_aware_stride,S11,T007,Sensitive context leakage,sensitive_context_leakage,33.0,1.0,0.6008333333333332,13.172500000000003,4.0,1.5966666666666671,synthetic
+cloud_aware_stride,S04,T011,Excessive agency,excessive_agency,33.0,1.0,0.6008333333333332,13.172500000000003,4.0,1.5966666666666671,synthetic
+cloud_aware_stride,S10,T011,Excessive agency,excessive_agency,33.0,1.0,0.6008333333333332,13.172500000000003,4.0,1.5966666666666671,synthetic
+cloud_aware_stride,S12,T011,Excessive agency,excessive_agency,33.0,1.0,0.6008333333333332,13.172500000000003,4.0,1.5966666666666671,synthetic
+cloud_aware_stride,S08,T005,Model artifact replacement,model_artifact_replacement,32.0,1.0,0.6008333333333332,12.773333333333337,3.0,1.1975000000000002,synthetic
+cloud_aware_stride,S08,T002,Impersonated workload identity,impersonated_workload_identity,30.0,1.0,0.6008333333333332,11.975000000000003,3.0,1.1975000000000002,synthetic
+cloud_aware_stride,S10,T002,Impersonated workload identity,impersonated_workload_identity,30.0,1.0,0.6008333333333332,11.975000000000003,3.0,1.1975000000000002,synthetic
+cloud_aware_stride,S01,T003,Indirect prompt injection,indirect_prompt_injection,25.0,1.0,0.6008333333333332,9.97916666666667,3.2,1.2773333333333339,synthetic
+cloud_aware_stride,S02,T004,Retrieval poisoning,retrieval_poisoning,24.0,1.0,0.6008333333333332,9.580000000000002,2.4,0.9580000000000002,synthetic
+cloud_aware_stride,S06,T004,Retrieval poisoning,retrieval_poisoning,24.0,1.0,0.6008333333333332,9.580000000000002,2.4,0.9580000000000002,synthetic
+cloud_aware_stride,S09,T004,Retrieval poisoning,retrieval_poisoning,24.0,1.0,0.6008333333333332,9.580000000000002,2.4,0.9580000000000002,synthetic
+cloud_aware_stride,S09,T008,Embedding metadata leakage,embedding_metadata_leakage,24.0,1.0,0.6008333333333332,9.580000000000002,2.4,0.9580000000000002,synthetic
+cloud_aware_stride,S05,T001,Forged MCP server identity,forged_mcp_server_identity,23.0,1.0,0.6008333333333332,9.180833333333336,2.4,0.9580000000000002,synthetic
+cloud_aware_stride,S10,T001,Forged MCP server identity,forged_mcp_server_identity,23.0,1.0,0.6008333333333332,9.180833333333336,2.4,0.9580000000000002,synthetic
+cloud_aware_stride,S05,T006,Missing tool call audit trail,missing_tool_call_audit_trail,19.0,1.0,0.6008333333333332,7.584166666666669,1.7999999999999998,0.7185000000000001,synthetic
+cloud_aware_stride,S12,T006,Missing tool call audit trail,missing_tool_call_audit_trail,19.0,1.0,0.6008333333333332,7.584166666666669,1.7999999999999998,0.7185000000000001,synthetic
+cloud_aware_stride,S03,T009,Model resource exhaustion,model_resource_exhaustion,19.0,1.0,0.6008333333333332,7.584166666666669,2.4,0.9580000000000002,synthetic
+cloud_aware_stride,S11,T009,Model resource exhaustion,model_resource_exhaustion,19.0,1.0,0.6008333333333332,7.584166666666669,2.4,0.9580000000000002,synthetic
+cloud_aware_stride,S07,T010,Retrieval amplification,retrieval_amplification,16.0,1.0,0.6008333333333332,6.3866666666666685,1.7999999999999998,0.7185000000000001,synthetic

@@ -1,0 +1,13 @@
+expected_critical_threats:
+  S01: [sensitive_context_leakage]
+  S02: [sensitive_context_leakage]
+  S03: [sensitive_context_leakage]
+  S04: [excessive_agency]
+  S05: [confused_deputy_through_mcp_tool]
+  S06: [sensitive_context_leakage]
+  S07: [sensitive_context_leakage]
+  S08: [model_artifact_replacement]
+  S09: [embedding_metadata_leakage]
+  S10: [impersonated_workload_identity]
+  S11: [sensitive_context_leakage]
+  S12: [missing_tool_call_audit_trail]
